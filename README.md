@@ -1,97 +1,48 @@
-# 🚀 Antigravity Key
+# F-AI-Account
 
-一个基于 FOFA API 的 Antigravity Console 账号信息批量导出工具。
+基于 FOFA 网络空间搜索引擎的 AI 服务凭证批量提取工具集，使用 Bun + TypeScript 构建。
 
-## ✨ 功能特性
+## 前置要求
 
-- 🔍 通过 FOFA API 搜索 `title="Antigravity Console"` 的目标
-- 📦 批量导出账号信息（邮箱和 refresh_token）
-- ⚡ 支持并发请求，提高效率
-- 📊 实时进度条显示
-- 🎨 美观的命令行界面
-- 🛡️ 完善的错误处理机制
+- [Bun](https://bun.sh/) 运行时
+- [FOFA](https://fofa.info/) API Key
 
-## 📋 环境要求
-
-- [Bun](https://bun.sh/) 运行时环境
-- FOFA API Key（从 [FOFA 用户中心](https://fofa.info/userInfo) 获取）
-
-## 🔧 安装
+## 安装
 
 ```bash
-# 克隆项目
-git clone <repository-url>
-cd F-Antigravity-Account
-
-# 安装依赖
 bun install
 ```
 
-## ⚙️ 配置
+## 配置
 
-### 方式一：环境变量
+复制 `.env` 文件并填入你的 FOFA Key：
 
-```bash
-export FOFA_KEY="your_fofa_key_here"
-export FOFA_SIZE="100"              # 可选，默认为 100
-export CONCURRENCY_LIMIT="10"       # 可选，并发数，默认为 10
-```
-
-### 方式二：.env 文件（推荐）
-
-在项目根目录创建 `.env` 文件：
-
-```bash
+```env
 FOFA_KEY=your_fofa_key_here
-FOFA_SIZE=100
-CONCURRENCY_LIMIT=10
+CONCURRENCY_LIMIT=20
+FOFA_SIZE=500
 ```
 
-**配置说明：**
+| 变量 | 说明 | 默认值 |
+|------|------|--------|
+| `FOFA_KEY` | FOFA API 密钥（必填） | - |
+| `FOFA_SIZE` | FOFA 查询结果数量 | `100` |
+| `CONCURRENCY_LIMIT` | 并发请求数 | `10` |
 
-- `FOFA_KEY`：必填，您的 FOFA API Key
-- `FOFA_SIZE`：可选，每次查询返回的结果数量（默认：100）
-- `CONCURRENCY_LIMIT`：可选，并发请求数量（默认：10）
+## 模块
 
-## 🚀 使用方法
+| 模块 | 说明 |
+|------|------|
+| [Antigravity](src/antigravity/README.md) | Antigravity Console 账号导出 |
+| [Kiro](src/kiro/README.md) | Kiro API 账号导出 |
+| [AIClient2API](src/aiclient2api/README.md) | AIClient2API 凭证提取 |
 
-```bash
-bun start
-```
-
-程序将自动：
-1. 使用 FOFA API 搜索 Antigravity Console
-2. 并发访问所有找到的链接
-3. 导出账号信息（邮箱和 refresh_token）
-4. 显示实时进度和统计信息
-
-## 📊 输出示例
-
-程序会输出找到的账号信息，格式如下：
+## 项目结构
 
 ```
-邮箱: example@email.com
-Refresh Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+src/
+├── common/           # 公共模块（配置、日志、FOFA、进度条、Banner）
+├── antigravity/      # Antigravity 模块
+├── kiro/             # Kiro 模块
+└── aiclient2api/     # AIClient2API 模块
 ```
-
-## 🛠️ 技术栈
-
-- **运行时**：Bun
-- **语言**：TypeScript
-- **依赖库**：
-  - `chalk` - 终端颜色输出
-  - `cfonts` - ASCII 艺术字
-  - `async` - 异步流程控制
-  - `progress` - 进度条显示
-
-## 📝 注意事项
-
-- 请遵守 Fofa 的使用政策和相关法律法规。
-- 请确保您的 FOFA API Key 有效且有足够的查询额度。
-- 导出的账号信息请妥善保管，注意信息安全。
-- 建议根据网络情况调整 `CONCURRENCY_LIMIT` 参数。
-- 本项目仅用于学习和研究目的，请勿用于非法用途。
-
-## ⚠️ 免责声明
-
-本项目仅供学习、研究和个人非商业用途，开发者不对因使用本项目而导致的任何直接或间接损失承担责任。用户在使用本项目时，应自行承担所有风险，并确保遵守所有有适用的法律法规。本项目不鼓励、不纵容任何非法活动。
